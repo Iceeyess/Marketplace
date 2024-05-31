@@ -8,4 +8,4 @@ from django.core.handlers.wsgi import WSGIRequest
 
 def get_catalog(request: WSGIRequest) -> HttpResponse:
     """Что-то нужно пояснить"""
-    return render(request, os.path.join(CatalogConfig.name, 'catalog.html'))
+    return render(request, os.path.join(CatalogConfig.name, 'index.html'))
