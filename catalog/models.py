@@ -27,7 +27,7 @@ class Product(models.Model):
         verbose_name="Фото",
         help_text="Загрузите фото товара",
     )
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category")
     price = models.FloatField(verbose_name="Стоимость товара", help_text="Введите строку стоимости товара")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
