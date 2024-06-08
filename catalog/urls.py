@@ -5,5 +5,5 @@ from catalog.apps import CatalogConfig
 app_name = CatalogConfig.name
 
 urlpatterns = [
-    path('', get_catalog),
+    path("", get_catalog),
 ]
