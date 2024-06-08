@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 
 
 admin.AdminSite.site_header = 'Управление по управлению всеми управлениями'
-admin.AdminSite.index_title = ''
+admin.AdminSite.index_title = 'Управление каталогами'
 
 urlpatterns = [
     path('admin/', admin.site.urls),

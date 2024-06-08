@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 # Create your models here.
@@ -24,7 +25,7 @@ class Product(models.Model):
     price = models.FloatField(verbose_name='Стоимость товара', help_text='Введите строку стоимости товара')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    manufactured_at = models.DateTimeField(default=datetime.now, verbose_name='Дата производства товара', help_text='Введите дату производства названия товара')
 
     def __str__(self):
         return self.name
