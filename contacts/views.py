@@ -6,8 +6,8 @@ from django.core.handlers.wsgi import WSGIRequest
 # Create your views here.
 
 
-def get_contacts(request: WSGIRequest) -> HttpResponse:
-    """Что-то нужно пояснить"""
+def send_contacts(request: WSGIRequest) -> HttpResponse:
+    """Метод POST принимает данные контактов"""
     if request.method == 'POST':
         name = request.POST.get('name')
         phone = request.POST.get('phone')
