@@ -79,8 +79,19 @@
                 </form>
             </div>
         </div>
+        {% if name %}
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">
+                Введенные данные:<br>
+            </h4>
+            <h6>
+                имя: {{ name }} <br>
+                Телефон: {{ phone }} <br>
+                Сообщение: {{message}}
+            </h6>
+        </div>
+        {% endif %}
     </div>
 </div>
-
 </body>
 </html>
