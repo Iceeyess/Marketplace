@@ -1,84 +1,48 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <!-- Обязательные метатеги -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <title>Каталог</title>
-</head>
-<body>
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-
-    <div class="col">
-        <nav class="ms-5">
-            <a class="p-2 btn btn-outline-primary" href="/">Каталог</a>
-            <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
-        </nav>
-    </div>
-    <div class="col-8">
-        <div class="nav">
-            <h5>
-                <ul class="nav-link active" aria-current="page">
-                    Ломо-оптика
-                </ul>
-            </h5>
-
-        </div>
-    </div>
-</div>
-
+{% extends "catalog/base.html" %} {# Расширяем содержимое базовым классом #}
+{% block catalog %}
+{% load static %}
 <div class="row">
+    {% for product in catalog_key %}
+    {% if product.image_preview %}
     <div class="col-3">
         <div class="card" style="width: 18rem;">
-            {% load static %}
-            <img src="{% static 'apology.webp' %}" class="card-img-top" alt="apology">
+            <img src="/media/{{ product.image_preview }}" class="card-img-top" alt="product" width="200" height=200>
             <div class="card-body">
-                <h5 class="card-title">Оправа очков № 1</h5>
-                <p class="card-text">Описание товара</p>
-                <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+                <div class="row">
+                    <div class="col-auto">
+                        <a href="{{ project_name }}/{{ product.id }}" class="btn btn-primary">Подробнее...</a>
+                    </div>
+                    <div class="col-auto center">
+                        <p class="text-dark-end m-1">{{ product.price }}</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
+    {% else %}
     <div class="col-3">
         <div class="card" style="width: 18rem;">
-            {% load static %}
             <img src="{% static 'apology.webp' %}" class="card-img-top" alt="apology">
             <div class="card-body">
-                <h5 class="card-title">Оправа очков № 2</h5>
-                <p class="card-text">Описание товара</p>
-                <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+                <div class="row">
+                    <div class="col-auto">
+                        <a href="{{ project_name }}/{{ product.id }}" class="btn btn-primary">Подробнее...</a>
+                    </div>
+                    <div class="col-auto center">
+                        <p class="text-dark-end m-1">{{ product.price }}</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-    <div class="col-3">
-        <div class="card" style="width: 18rem;">
-            {% load static %}
-            <img src="{% static 'apology.webp' %}" class="card-img-top" alt="apology">
-            <div class="card-body">
-                <h5 class="card-title">Оправа очков № 2</h5>
-                <p class="card-text">Описание товара</p>
-                <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-3">
-        <div class="card" style="width: 18rem;">
-            {% load static %}
-            <img src="{% static 'apology.webp' %}" class="card-img-top" alt="apology">
-            <div class="card-body">
-                <h5 class="card-title">Оправа очков № 2</h5>
-                <p class="card-text">Описание товара</p>
-                <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
-            </div>
-        </div>
-    </div>
+    {% endif %}
+    {% endfor %}
 </div>
+{% endblock %}
 
-
-</body>
-</html>

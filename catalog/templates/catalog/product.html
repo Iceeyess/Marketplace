@@ -1,0 +1,24 @@
+{% extends 'catalog/base.html' %}
+
+{% block product %}
+{% load static %}
+<hr class="featurette-divider">
+
+<div class="row featurette">
+    <div class="col-md-7 order-md-2">
+        <p class="lead">Стоимость: {{ product.price }}</p>
+        <p class="text">Наименование:</p>
+        <h2 class="featurette-heading">{{ product.name }}></h2>
+        <p class="text">Описание:</p>
+        <p class="lead">{{ product.description }}</p>
+    </div>
+    <div class="col-md-5 order-md-1">
+        {% if product.image_preview %}
+            <img src="/media/{{ product.image_preview }}" class="card-img-top" alt="product">
+        {% else %}
+            <img src="{% static 'apology.webp' %}" class="card-img-top" alt="product">
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
