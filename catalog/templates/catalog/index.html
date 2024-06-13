@@ -2,14 +2,15 @@
 {% block catalog %}
 {% load static %}
 <div class="row">
+    {% load get_path_for_media %}
     {% for product in catalog_key %}
     {% if product.image_preview %}
     <div class="col-3">
         <div class="card" style="width: 18rem;">
-            <img src="/media/{{ product.image_preview }}" class="card-img-top" alt="product" width="200" height=200>
+            <img src="/media/{{product.image_preview}}" class="card-img-top" alt="product" width="200" height=200>
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.description }}</p>
+                <p class="card-text">{{ product.description|slice:":100" }}...</p>
                 <div class="row">
                     <div class="col-auto">
                         <a href="{{ project_name }}/{{ product.id }}" class="btn btn-primary">Подробнее...</a>
@@ -28,7 +29,7 @@
             <img src="{% static 'apology.webp' %}" class="card-img-top" alt="apology">
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.description }}</p>
+                <p class="card-text">{{ product.description|slice:":100" }}...</p>
                 <div class="row">
                     <div class="col-auto">
                         <a href="{{ project_name }}/{{ product.id }}" class="btn btn-primary">Подробнее...</a>
