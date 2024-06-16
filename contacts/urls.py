@@ -5,5 +5,5 @@ from contacts.apps import ContactsConfig
 app_name = ContactsConfig.name
 
 urlpatterns = [
-    path("", send_contacts),
+
 ]
