@@ -1,4 +1,4 @@
-{% extends "contacts/base.html" %} {# Расширяем содержимое базовым классом #}
+{% extends "catalog/base.html" %} {# Расширяем содержимое базовым классом #}
 {% block contacts %}
 <div class="row text-start">
     <div class="col-lg-9 col-md-6 col-sm-12">
@@ -6,16 +6,16 @@
             <div class="card-body">
                 <table class="table table-striped">
                     <tr>
-                        <td class="w-25">Страна</td>
-                        <td>USA</td>
+                        <td class="w-25">Наименование</td>
+                        <td>Ломо-оптика</td>
                     </tr>
                     <tr>
-                        <td class="w-25">ИНН</td>
-                        <td>91-1144442</td>
+                        <td class="w-25">Страна</td>
+                        <td>Российская Федерация</td>
                     </tr>
                     <tr>
                         <td class="w-25">Адрес</td>
-                        <td>Redmond,WA,98052-6399</td>
+                        <td>Москва, Брюсов переулок, д.4, цокольный этаж</td>
                     </tr>
                 </table>
             </div>
@@ -86,16 +86,7 @@
             </tbody>
         </table>
 
-        <!--        <div class="card-header">-->
-        <!--            <h4 class="my-0 font-weight-normal">-->
-        <!--                Введенные данные:<br>-->
-        <!--            </h4>-->
-        <!--            <h6>-->
-        <!--                имя: {{ name }} <br>-->
-        <!--                Телефон: {{ phone }} <br>-->
-        <!--                Сообщение: {{message}}-->
-        <!--            </h6>-->
-        <!--        </div>-->
+
         {% endif %}
     </div>
 </div>

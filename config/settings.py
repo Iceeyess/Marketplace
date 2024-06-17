@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from catalog.apps import CatalogConfig
-from contacts.apps import ContactsConfig
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "catalog",
-    "contacts",
 ]
 
 MIDDLEWARE = [
@@ -59,7 +58,6 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             os.path.join(BASE_DIR, CatalogConfig.name, "templates"),
-            os.path.join(BASE_DIR, ContactsConfig.name, "templates"),
         ],
         "APP_DIRS": True,
         "OPTIONS": {

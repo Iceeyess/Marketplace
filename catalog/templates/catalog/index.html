@@ -2,11 +2,22 @@
 {% block catalog %}
 {% load static %}
 {% load get_path_for_media %}
+<div class="row justify-content-sm-center">
+    {% if page_obj.has_previous %}
+    <div class="col col-md-2 start"><a href="?page={{ page_obj.previous_page_number }}">Предыдущая страница {{page_obj.paginator.previous_page_number}}</a></div>
+    {% endif %}
+    <div class="col col-md-2 center">Страница {{page_obj.number}}</div>
+    {% if page_obj.has_next %}
+    <div class="col col-md-2 end"><a href="?page={{ page_obj.next_page_number }}">Следующая страница {{page_obj.paginator.next_page_number}}</a></div>
+    {% endif %}
+</div>
+<br>
 <div class="row">
-    {% for product in catalog_key %}
+    {% for product in page_obj %}
     <div class="col-3">
         <div class="card" style="width: 18rem;">
-            <img src="{{ product.image_preview|get_image_path:'/static/apology.webp' }}" class="card-img-top" alt="product" width="200" height=200>
+            <img src="{{ product.image_preview|get_image_path:'/static/apology.webp' }}" class="card-img-top"
+                 alt="product" width="200" height=200>
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
                 <p class="card-text">{{ product.description|slice:":100" }}...</p>
