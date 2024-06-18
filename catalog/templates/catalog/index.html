@@ -3,13 +3,21 @@
 {% load static %}
 {% load get_path_for_media %}
 <div class="row justify-content-sm-center">
-    {% if page_obj.has_previous %}
-    <div class="col col-md-2 start"><a href="?page={{ page_obj.previous_page_number }}">Предыдущая страница {{page_obj.paginator.previous_page_number}}</a></div>
-    {% endif %}
-    <div class="col col-md-2 center">Страница {{page_obj.number}}</div>
-    {% if page_obj.has_next %}
-    <div class="col col-md-2 end"><a href="?page={{ page_obj.next_page_number }}">Следующая страница {{page_obj.paginator.next_page_number}}</a></div>
-    {% endif %}
+    <div class="col-3">
+        <nav aria-label="...">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                    {{page_obj.previous_page_number}}</a></li>
+                {% endif %}
+                <li class="page-item active"><a class="page-link" href="?page={{ page_obj.number }}">{{page_obj.number}}</a></li>
+                {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                    {{page_obj.next_page_number}}</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 </div>
 <br>
 <div class="row">
