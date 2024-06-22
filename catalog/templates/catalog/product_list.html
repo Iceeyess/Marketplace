@@ -1,5 +1,5 @@
 {% extends "catalog/base.html" %} {# Расширяем содержимое базовым классом #}
-{% block catalog %}
+{% block context %}
 {% load static %}
 {% load get_path_for_media %}
 <div class="row justify-content-sm-center">
@@ -19,9 +19,10 @@
         </nav>
     </div>
 </div>
-<br>
+
+
 <div class="row">
-    {% for product in page_obj %}
+    {% for product in products %}
     <div class="col-3">
         <div class="card" style="width: 18rem;">
             <img src="{{ product.image_preview|get_image_path:'/static/apology.webp' }}" class="card-img-top"
@@ -34,7 +35,7 @@
                         <a href="{{ project_name }}/{{ product.id }}" class="btn btn-primary">Подробнее...</a>
                     </div>
                     <div class="col-auto center">
-                        <p class="text-dark-end m-1">{{ product.price }}</p>
+                        <p class="text-dark-end m-1">{{ product.price|floatformat:"2g" }} руб.</p>
                     </div>
                 </div>
             </div>
