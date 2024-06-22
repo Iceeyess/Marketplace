@@ -1,0 +1,49 @@
+{% extends "catalog/base.html" %} {# Расширяем содержимое базовым классом #}
+{% block context %}
+{% load static %}
+{% load get_path_for_media %}
+
+
+<section class="py-5 text-center container">
+    <div class="row" align="start">
+        <div class="col-2">
+            <a class="btn btn-primary" href="{% url 'blog:blog_create' %}">Создать</a>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+    {% for object in object_list %}
+    {% if object.is_public %}
+    <div class="col-3">
+        <div class="card" style="width: 18rem;">
+            <img src="{{ object.image_preview|get_image_path:'/static/apology.webp' }}" class="card-img-top"
+                 alt="product" width="100" height=200>
+            <div class="card-body">
+                <h5 class="card-title">{{ object.title }}</h5>
+                <p class="card-text">{{ object.body|slice:":100" }}...</p>
+                <p type="button" class="btn btn-outline-secondary"> Счетчик просмотров {{ object.count_view }}</p>
+                <div class="container px-4 text-center">
+                    <div class="row gy-0">
+                        <div class="col">
+                            <div class="p-1"><a href="{% url 'blog:blog_detail' object.pk %}" class="btn btn-primary">Подробнее...</a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="p-1"><a href="{% url 'blog:blog_update' object.pk %}" class="btn btn-primary">Редактировать</a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="p-1"><a href="{% url 'blog:blog_delete' object.pk %}" class="btn btn-primary">Удалить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
+
