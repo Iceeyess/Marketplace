@@ -22,7 +22,6 @@
             <div class="card-body">
                 <h5 class="card-title">{{ object.title }}</h5>
                 <p class="card-text">{{ object.body|slice:":100" }}...</p>
-                <p type="button" class="btn btn-outline-secondary"> Счетчик просмотров {{ object.count_view }}</p>
                 <div class="container px-4 text-center">
                     <div class="row gy-0">
                         <div class="col">
@@ -37,6 +36,7 @@
                             <div class="p-1"><a href="{% url 'blog:blog_delete' object.pk %}" class="btn btn-primary">Удалить</a>
                             </div>
                         </div>
+                        <div class="alert alert-light" role="alert"> Счетчик просмотров {{ object.count_view }} </div>
                     </div>
                 </div>
             </div>
