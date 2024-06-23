@@ -20,7 +20,6 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-
 admin.AdminSite.site_header = "Управление сайтом Ломо-оптика"
 admin.AdminSite.index_title = "Администрирование"
 
@@ -28,8 +27,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("catalog.urls", namespace="catalog")),
     path("catalog/", include("catalog.urls", namespace="catalog")),
-    path("contacts/", include("catalog.urls", namespace="contacts")),
-    path("blog/", include("catalog.urls", namespace="blog")),
+    path("contacts/", include("contacts.urls", namespace="contacts")),
+    path("blog/", include("blog.urls", namespace="blog")),
 ]
 
 if settings.DEBUG:

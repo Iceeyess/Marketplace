@@ -41,34 +41,3 @@ class Product(models.Model):
         ordering = ("name",)
 
 
-class Contact(models.Model):
-    name = models.CharField(max_length=50, verbose_name='Имя', help_text='Введите имя')
-    phone = models.CharField(max_length=10, verbose_name='Телефон', help_text='Введите телефон(не более 10 символов)')
-    message = models.TextField()
-
-    def __str__(self):
-        return f"{self.name} {self.phone}"
-
-    class Meta:
-        verbose_name = 'Контакт'
-        verbose_name_plural = 'Контакты'
-        ordering = ("name",)
-
-
-class Blog(models.Model):
-    title = models.CharField(max_length=100, verbose_name='Название', help_text='Введите название')
-    slug = models.CharField(max_length=150, null=True, blank=True, unique=True, verbose_name='Slug')
-    body = models.TextField(verbose_name='Содержимое', help_text='Введите содержимое')
-    image_preview = models.ImageField(
-        upload_to="blog/photo",
-        blank=True,
-        null=True,
-        verbose_name="Изображение")
-    creation_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
-    is_public = models.BooleanField(default=True, verbose_name='Публикация')
-    count_view = models.PositiveIntegerField(default=0, verbose_name='Количество просмотров')
-
-    class Meta:
-        verbose_name = "Блог"
-        verbose_name_plural = "Блоги"
-        ordering = ("pk",)
