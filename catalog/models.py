@@ -66,7 +66,7 @@ class Blog(models.Model):
         verbose_name="Изображение")
     creation_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     is_public = models.BooleanField(default=True, verbose_name='Публикация')
-    count_view = models.IntegerField(default=0, verbose_name='Количество просмотров')
+    count_view = models.PositiveIntegerField(default=0, verbose_name='Количество просмотров')
 
     class Meta:
         verbose_name = "Блог"
