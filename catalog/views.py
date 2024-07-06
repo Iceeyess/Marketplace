@@ -3,7 +3,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Product, Category
 from .apps import CatalogConfig
 from django.core.paginator import Paginator
-
+from .forms import ProductForm
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -17,16 +18,44 @@ class CatalogListView(ListView):
         'title': 'Каталог продуктов'
     }
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
 
 class CatalogDetailView(DetailView):
     model = Product
     extra_context = {
         'project_name': CatalogConfig.name,
+        'title': 'Детализация товара'
     }
+
+
+class CatalogCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('catalog:product')
+    extra_context = {
+        'project_name': CatalogConfig.name,
+        'title': 'Создание товара'
+    }
+
+
+class CatalogUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('catalog:product')
+    extra_context = {
+        'project_name': CatalogConfig.name,
+        'title': 'Редактирование товара'
+    }
+
+
+class CatalogDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('catalog:product')
+    extra_context = {
+        'project_name': CatalogConfig.name,
+        'title': 'Создание товара'
+    }
+
+
 
 
 # def get_product(request: WSGIRequest, product_id: int) -> HttpResponse:
