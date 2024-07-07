@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Product, Category
+from .models import Product, Category, Version
 from .apps import CatalogConfig
 from django.core.paginator import Paginator
-from .forms import ProductForm
+from .forms import ProductForm, VersionForm
 from django.urls import reverse_lazy
+from django.forms import inlineformset_factory
 
 # Create your views here.
 
@@ -17,6 +18,11 @@ class CatalogListView(ListView):
         'project_name': CatalogConfig.name,
         'title': 'Каталог продуктов'
     }
+
+    def get_queryset(self, *args, **kwargs):
+        query = super().get_queryset()
+        [print(_.versions) for _ in query ]
+        return query
 
 
 class CatalogDetailView(DetailView):
@@ -45,6 +51,29 @@ class CatalogUpdateView(UpdateView):
         'project_name': CatalogConfig.name,
         'title': 'Редактирование товара'
     }
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        ProductFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+        if self.request.method == 'POST':
+            context_data['formset'] = ProductFormset(self.request.POST, instance=self.object)
+        else:
+            context_data['formset'] = ProductFormset(instance=self.object)
+        print(context_data)
+        return context_data
+
+    def form_valid(self, form, *args, **kwargs):
+        context_data = super().get_context_data()
+        formset = context_data.get(['formset'])
+        if formset:
+            if form.id_valid() and formset.is_valid():
+                self.object = form.save()
+                formset.instance = self.object
+                formset.save()
+                return super().form_valid(form)
+            else:
+                self.render_to_response(self.get_context_data(form=form, formset=formset))
+        return context_data
 
 
 class CatalogDeleteView(DeleteView):

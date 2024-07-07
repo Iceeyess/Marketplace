@@ -2,27 +2,49 @@
 
 {% block context %}
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <form class="row" method="post" enctype="multipart/form-data">
-                <div class="card">
-                    <div class="card-body">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                    </div>
-                    {% if object %}
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                    </div>
-                    {% else %}
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Создать</button>
-                    </div>
-                    {% endif %}
+    <form class="row" method="post" enctype="multipart/form-data">
+        <div class="col-6">
+            <div class="card">
+                {% if object %}
+                <p class="card-text">Редактирование продукта</p>
+                {% else %}
+                <p class="card-text">Создание продукта</p>
+                {% endif %}
+                <div class="card-body">
+                    {% csrf_token %}
+                    {{ form.as_p }}
                 </div>
-            </form>
+                <button type="submit" class="btn btn-primary">
+                    {% if object %}
+                    Сохранить
+                    {% else %}
+                    Создать
+                    {% endif %}
+                </button>
+            </div>
         </div>
-    </div>
+        <div class="col-6">
+            <div class="card">
+                <p class="card-text">Редактирование версии</p>
+                <div class="card-body">
+                    {{ formset.management_form }}
+                    {% for form in formset.forms %}
+                    {{ form.as_p }}
+                    {% endfor %}
+                </div>
+            </div>
+    </form>
+</div>
+<div class="col-6">
+    <form class="row" method="post" enctype="multipart/form-data">
+        <div class="card">
+            <div class="card-body">
+                {% csrf_token %}
+            </div>
+        </div>
+    </form>
+</div>
+</div>
 </div>
 
 {% endblock %}
