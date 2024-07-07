@@ -25,10 +25,10 @@ admin.AdminSite.index_title = "Администрирование"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("catalog.urls", namespace="catalog")),
     path("catalog/", include("catalog.urls", namespace="catalog")),
     path("contacts/", include("contacts.urls", namespace="contacts")),
     path("blog/", include("blog.urls", namespace="blog")),
+    path("", include("catalog.urls", namespace="main")),
 ]
 
 if settings.DEBUG:

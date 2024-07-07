@@ -19,7 +19,13 @@
         </nav>
     </div>
 </div>
-
+<div class="row md-5">
+    <div class="container">
+        <a class="btn btn-primary" href="{% url 'catalog:product_create' %}" role="button">
+            Добавить продукт
+        </a>
+    </div>
+</div>
 
 <div class="row">
     {% for product in products %}
@@ -32,7 +38,7 @@
                 <p class="card-text">{{ product.description|slice:":100" }}...</p>
                 <div class="row">
                     <div class="col-auto">
-                        <a href="{{ project_name }}/{{ product.id }}" class="btn btn-primary">Подробнее...</a>
+                        <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-primary">Подробнее...</a>
                     </div>
                     <div class="col-auto center">
                         <p class="text-dark-end m-1">{{ product.price|floatformat:"2g" }} руб.</p>
