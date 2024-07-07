@@ -25,7 +25,7 @@ class ProductForm(ModelForm):
         return self.cleaned_data['name']
 
 
-class VersionForm(forms.ModelForm):
+class VersionForm(ModelForm):
     class Meta:
         model = Version
         fields = '__all__'

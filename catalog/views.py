@@ -47,10 +47,10 @@ class CatalogUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product')
-    extra_context = {
-        'project_name': CatalogConfig.name,
-        'title': 'Редактирование товара'
-    }
+    # extra_context = {
+    #     'project_name': CatalogConfig.name,
+    #     'title': 'Редактирование товара'
+    # }
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -59,21 +59,20 @@ class CatalogUpdateView(UpdateView):
             context_data['formset'] = ProductFormset(self.request.POST, instance=self.object)
         else:
             context_data['formset'] = ProductFormset(instance=self.object)
-        print(context_data)
         return context_data
 
-    def form_valid(self, form, *args, **kwargs):
-        context_data = super().get_context_data()
-        formset = context_data.get(['formset'])
-        if formset:
-            if form.id_valid() and formset.is_valid():
-                self.object = form.save()
-                formset.instance = self.object
-                formset.save()
-                return super().form_valid(form)
-            else:
-                self.render_to_response(self.get_context_data(form=form, formset=formset))
-        return context_data
+    def form_valid(self, form):
+        context = super().get_context_data()
+        print(context)  # Там нет formset!!!!
+        formset = context['formset']
+        self.object = form.save()
+        if form.id_valid() and formset.is_valid():
+            formset.instance = self.object
+            formset.save()
+        return super().form_valid(form)
+        # else:
+        #     self.render_to_response(self.get_context_data(form=form, formset=formset))
+
 
 
 class CatalogDeleteView(DeleteView):
