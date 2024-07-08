@@ -20,9 +20,7 @@ class CatalogListView(ListView):
     }
 
     def get_queryset(self, *args, **kwargs):
-        query = super().get_queryset()
-        [print(_.versions) for _ in query ]
-        return query
+        return super().get_queryset().filter(versions__is_active=True).all()
 
 
 class CatalogDetailView(DetailView):
@@ -47,10 +45,10 @@ class CatalogUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product')
-    # extra_context = {
-    #     'project_name': CatalogConfig.name,
-    #     'title': 'Редактирование товара'
-    # }
+    extra_context = {
+        'project_name': CatalogConfig.name,
+        'title': 'Редактирование товара'
+    }
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -59,20 +57,16 @@ class CatalogUpdateView(UpdateView):
             context_data['formset'] = ProductFormset(self.request.POST, instance=self.object)
         else:
             context_data['formset'] = ProductFormset(instance=self.object)
+
         return context_data
 
     def form_valid(self, form):
-        context = super().get_context_data()
-        print(context)  # Там нет formset!!!!
-        formset = context['formset']
+        formset = self.get_context_data().get('formset')
         self.object = form.save()
-        if form.id_valid() and formset.is_valid():
+        if form.is_valid():
             formset.instance = self.object
             formset.save()
         return super().form_valid(form)
-        # else:
-        #     self.render_to_response(self.get_context_data(form=form, formset=formset))
-
 
 
 class CatalogDeleteView(DeleteView):
