@@ -20,9 +20,7 @@ class CatalogListView(ListView):
     }
 
     def get_queryset(self, *args, **kwargs):
-        query = super().get_queryset()
-        [print(_.versions) for _ in query ]
-        return query
+        return super().get_queryset().filter(versions__is_active=True).all()
 
 
 class CatalogDetailView(DetailView):
@@ -55,7 +53,6 @@ class CatalogUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         ProductFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
-        print('Печатаю self.request.method', self.request.method)
         if self.request.method == 'POST':
             context_data['formset'] = ProductFormset(self.request.POST, instance=self.object)
         else:
@@ -64,7 +61,7 @@ class CatalogUpdateView(UpdateView):
         return context_data
 
     def form_valid(self, form):
-        formset = super().get_context_data()['formset']
+        formset = self.get_context_data().get('formset')
         self.object = form.save()
         if form.is_valid():
             formset.instance = self.object
