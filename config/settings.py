@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from catalog.apps import CatalogConfig
 from contacts.apps import ContactsConfig
+from users.apps import UsersConfig
 from blog.apps import BlogConfig
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -137,3 +138,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL[1:])
+
+LOGIN_REDIRECT_URL = "catalog:product"
+LOGIN_URL = f"{UsersConfig.name}/login/"
+LOGOUT_REDIRECT_URL = "catalog:product"
