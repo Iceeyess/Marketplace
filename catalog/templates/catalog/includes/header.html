@@ -32,7 +32,10 @@
                         <h5 class="bg-success text-white align-content-center">
                             {{ user.username }}
                         </h5>
-                        <a class="nav-link" href="{% url 'users:logout' %}">Выйти</a>
+                        <form method="post" action="{% url 'users:logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Выйти</button>
+                        </form>
                     </li>
                 </ul>
             </div>

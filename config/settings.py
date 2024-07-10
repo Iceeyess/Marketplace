@@ -140,5 +140,5 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL[1:])
 
 LOGIN_REDIRECT_URL = "catalog:product"
-LOGIN_URL = f"{UsersConfig.name}/login/"
+LOGIN_URL = "users:login"
 LOGOUT_REDIRECT_URL = "catalog:product"
