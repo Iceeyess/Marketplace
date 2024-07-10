@@ -1,4 +1,6 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Blog
 from .apps import BlogConfig
@@ -6,7 +8,7 @@ from pytils.translit import slugify
 from django.urls import reverse_lazy
 # Create your views here.
 
-class BlogCreateView(CreateView):
+class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Blog
     fields = ['title', 'body', 'image_preview', 'is_public', ]
     success_url = reverse_lazy('blog:blog_view')
@@ -14,6 +16,7 @@ class BlogCreateView(CreateView):
         'project_name': BlogConfig.name,
         'title': 'Создать блог'
     }
+    login_url = "users:login"
 
     def form_valid(self, form):
         # получает на вход форму, изменяет в атрибуте slug, сохраняет в БД
@@ -24,7 +27,7 @@ class BlogCreateView(CreateView):
         return super().form_valid(form)
 
 
-class BlogListView(ListView):
+class BlogListView(LoginRequiredMixin, ListView):
     model = Blog
     extra_context = {
         'project_name': BlogConfig.name,
@@ -46,7 +49,7 @@ class BlogDetailView(DetailView):
         return self.object
 
 
-class BlogUpdateView(UpdateView):
+class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
     fields = ['title', 'body', 'image_preview', 'is_public', ]
     success_url = reverse_lazy('blog:blog_view')
@@ -67,6 +70,6 @@ class BlogUpdateView(UpdateView):
         return reverse_lazy('blog:blog_detail', args=[self.kwargs.get('pk')])
 
 
-class BlogDeleteView(DeleteView):
+class BlogDeleteView(LoginRequiredMixin, DeleteView):
     model = Blog
     success_url = reverse_lazy('blog:blog_view')
