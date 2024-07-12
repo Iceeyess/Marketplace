@@ -65,6 +65,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, CatalogConfig.name, "templates"),
             os.path.join(BASE_DIR, ContactsConfig.name, "templates"),
             os.path.join(BASE_DIR, BlogConfig.name, "templates"),
+            os.path.join(BASE_DIR, UsersConfig.name, "templates"),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -139,6 +140,15 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL[1:])
 
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = "21cfk8lf6gbp@mail.ru"
+EMAIL_HOST_PASSWORD = "1NX21AcSLns2XUkuQbsv"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
 LOGIN_REDIRECT_URL = "catalog:product"
 LOGIN_URL = "users:login"
 LOGOUT_REDIRECT_URL = "catalog:product"
+
+AUTH_USER_MODEL = "users.User"
