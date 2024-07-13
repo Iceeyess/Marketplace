@@ -14,3 +14,6 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    def __repr__(self):
+        return self.email
+

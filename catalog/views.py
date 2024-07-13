@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Product, Category, Version
@@ -10,7 +11,7 @@ from django.forms import inlineformset_factory
 # Create your views here.
 
 
-class CatalogListView(ListView):
+class CatalogListView(LoginRequiredMixin, ListView):
     model = Product
     paginate_by = 8
     context_object_name = 'products'
@@ -20,10 +21,12 @@ class CatalogListView(ListView):
     }
 
     def get_queryset(self, *args, **kwargs):
-        return super().get_queryset().filter(versions__is_active=True).all()
+        return super().get_queryset().filter(versions__is_active=True)
 
 
-class CatalogDetailView(DetailView):
+
+
+class CatalogDetailView(LoginRequiredMixin, DetailView):
     model = Product
     extra_context = {
         'project_name': CatalogConfig.name,
@@ -31,7 +34,7 @@ class CatalogDetailView(DetailView):
     }
 
 
-class CatalogCreateView(CreateView):
+class CatalogCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product')
@@ -40,8 +43,15 @@ class CatalogCreateView(CreateView):
         'title': 'Создание товара'
     }
 
+    def form_valid(self, form):
+        # получает на вход форму, сохраняет в БД
+        if form.is_valid():
+            user = form.save()
+            user.user_name_created = self.request.user.email
+        return super().form_valid(form)
 
-class CatalogUpdateView(UpdateView):
+
+class CatalogUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product')
@@ -69,7 +79,7 @@ class CatalogUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class CatalogDeleteView(DeleteView):
+class CatalogDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:product')
     extra_context = {
