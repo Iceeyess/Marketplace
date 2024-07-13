@@ -152,3 +152,6 @@ LOGIN_URL = "users:login"
 LOGOUT_REDIRECT_URL = "catalog:product"
 
 AUTH_USER_MODEL = "users.User"
+
+# для того чтобы не отправлять письма физически, а только в консоли
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

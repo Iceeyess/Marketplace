@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
+    PasswordResetCompleteView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
@@ -25,6 +26,7 @@ class LoginUser(LoginView):
     # def get_success_url(self):
     #     return reverse('catalog:product')
 
+
 class RegisterView(CreateView):
     model = User
     form_class = RegistrationForm
@@ -45,6 +47,26 @@ class RegisterView(CreateView):
                 fail_silently=False,
             )
         return super().form_valid(form)
+
+
+class UserPasswordReset(PasswordResetView):
+    template_name = 'users/password_reset_form.html'
+    success_url = reverse_lazy('users:password_reset_done')
+    email_template_name = 'users/password_reset_email.html'
+
+
+class UserPasswordResetDone(PasswordResetDoneView):
+    template_name = 'users/password_reset_done.html'
+
+
+class UserPasswordResetConfirm(PasswordResetConfirmView):
+    template_name = 'users/password_reset_confirm.html'
+    success_url = reverse_lazy('users:password_reset_complete')
+
+
+class UserPasswordResetComplete(PasswordResetCompleteView):
+    template_name = 'users/password_reset_complete.html'
+
 
 
 # def login_user(request):
