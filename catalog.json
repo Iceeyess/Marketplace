@@ -25,7 +25,8 @@
     "category": 2,
     "price": 5390.0,
     "created_at": "2024-06-09T09:40:33.946Z",
-    "updated_at": "2024-06-09T09:40:33.946Z"
+    "updated_at": "2024-06-09T09:40:33.946Z",
+    "user_name_created": null
   }
 },
 {
@@ -38,7 +39,8 @@
     "category": 1,
     "price": 7270.0,
     "created_at": "2024-06-09T09:40:33.946Z",
-    "updated_at": "2024-06-09T09:40:33.946Z"
+    "updated_at": "2024-06-09T09:40:33.946Z",
+    "user_name_created": null
   }
 },
 {
@@ -51,7 +53,8 @@
     "category": 1,
     "price": 7286.0,
     "created_at": "2024-06-09T09:40:33.946Z",
-    "updated_at": "2024-06-09T09:40:33.946Z"
+    "updated_at": "2024-06-09T09:40:33.946Z",
+    "user_name_created": null
   }
 },
 {
@@ -64,7 +67,8 @@
     "category": 2,
     "price": 5270.0,
     "created_at": "2024-06-09T09:40:33.946Z",
-    "updated_at": "2024-06-09T09:40:33.946Z"
+    "updated_at": "2024-06-09T09:40:33.946Z",
+    "user_name_created": null
   }
 },
 {
@@ -77,7 +81,8 @@
     "category": 1,
     "price": 10760.0,
     "created_at": "2024-06-09T09:40:33.946Z",
-    "updated_at": "2024-06-09T09:40:33.946Z"
+    "updated_at": "2024-07-13T10:21:20.975Z",
+    "user_name_created": null
   }
 },
 {
@@ -90,7 +95,8 @@
     "category": 1,
     "price": 5671.0,
     "created_at": "2024-06-09T09:40:33.947Z",
-    "updated_at": "2024-06-09T09:40:33.947Z"
+    "updated_at": "2024-06-09T09:40:33.947Z",
+    "user_name_created": null
   }
 },
 {
@@ -103,7 +109,8 @@
     "category": 1,
     "price": 1946.0,
     "created_at": "2024-06-16T17:35:16.670Z",
-    "updated_at": "2024-06-16T17:35:16.670Z"
+    "updated_at": "2024-06-16T17:35:16.670Z",
+    "user_name_created": null
   }
 },
 {
@@ -116,7 +123,8 @@
     "category": 2,
     "price": 5390.0,
     "created_at": "2024-06-16T17:36:29.706Z",
-    "updated_at": "2024-06-16T17:36:29.706Z"
+    "updated_at": "2024-06-16T17:36:29.706Z",
+    "user_name_created": null
   }
 },
 {
@@ -129,7 +137,8 @@
     "category": 2,
     "price": 4990.0,
     "created_at": "2024-06-16T17:37:31.403Z",
-    "updated_at": "2024-06-16T17:37:31.403Z"
+    "updated_at": "2024-06-16T17:37:31.403Z",
+    "user_name_created": null
   }
 },
 {
@@ -142,7 +151,8 @@
     "category": 2,
     "price": 1290.0,
     "created_at": "2024-06-16T17:38:02.171Z",
-    "updated_at": "2024-06-16T17:38:02.171Z"
+    "updated_at": "2024-06-16T17:38:02.171Z",
+    "user_name_created": null
   }
 },
 {
@@ -155,7 +165,8 @@
     "category": 2,
     "price": 1290.0,
     "created_at": "2024-06-16T17:38:43.018Z",
-    "updated_at": "2024-06-16T17:38:43.018Z"
+    "updated_at": "2024-06-16T17:38:43.018Z",
+    "user_name_created": null
   }
 },
 {
@@ -168,7 +179,8 @@
     "category": 2,
     "price": 5390.0,
     "created_at": "2024-06-16T17:39:22.940Z",
-    "updated_at": "2024-06-16T17:39:22.940Z"
+    "updated_at": "2024-06-16T17:39:22.940Z",
+    "user_name_created": null
   }
 },
 {
@@ -181,7 +193,8 @@
     "category": 2,
     "price": 4990.0,
     "created_at": "2024-06-16T17:39:58.730Z",
-    "updated_at": "2024-06-16T17:39:58.730Z"
+    "updated_at": "2024-06-16T17:39:58.730Z",
+    "user_name_created": null
   }
 },
 {
@@ -194,7 +207,8 @@
     "category": 1,
     "price": 1680.0,
     "created_at": "2024-06-16T17:42:13.539Z",
-    "updated_at": "2024-06-16T17:42:13.539Z"
+    "updated_at": "2024-06-16T17:42:13.539Z",
+    "user_name_created": null
   }
 },
 {
@@ -207,7 +221,8 @@
     "category": 1,
     "price": 2300.0,
     "created_at": "2024-06-16T17:42:56.148Z",
-    "updated_at": "2024-06-16T17:42:56.148Z"
+    "updated_at": "2024-06-16T17:42:56.148Z",
+    "user_name_created": null
   }
 },
 {
@@ -220,7 +235,8 @@
     "category": 1,
     "price": 3500.0,
     "created_at": "2024-06-16T17:43:40.057Z",
-    "updated_at": "2024-06-16T17:43:40.057Z"
+    "updated_at": "2024-06-16T17:43:40.057Z",
+    "user_name_created": null
   }
 },
 {
@@ -233,7 +249,100 @@
     "category": 1,
     "price": 6370.0,
     "created_at": "2024-06-16T17:44:17.119Z",
-    "updated_at": "2024-06-16T17:44:17.119Z"
+    "updated_at": "2024-06-16T17:44:17.119Z",
+    "user_name_created": null
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 18,
+  "fields": {
+    "name": "СОЛНЦЕЗАЩИТНЫЕ ОЧКИ NANO BIMBO 620215 С4  M",
+    "description": "Яркие очки в розовом цвете для модных детских образов.",
+    "image_preview": "products/photo/29095.webp",
+    "category": 2,
+    "price": 1069.0,
+    "created_at": "2024-07-13T10:30:02.818Z",
+    "updated_at": "2024-07-13T10:30:02.821Z",
+    "user_name_created": null
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 19,
+  "fields": {
+    "name": "TOTAL30 for Astigmatism (3 линзы)",
+    "description": "Торические ежемесячные контактные линзы TOTAL30 for Astigmatism от Alcon продаются в удобной упаковке по 3 блистера.\r\n\r\nОни сделаны из уникального водоградиентного материала и обладают ультрамягкой поверхностью, за счет чего не ощущаются на глазах. Благодаря высокой кислородной проницаемости линз глаза могут «дышать» на протяжении всего дня. Линзы TOTAL30 for Astigmatism быстро и точно принимают правильное положение, сохраняя стабильность зрения даже при наклоне головы.\r\n\r\nТехнологии TOTAL30 for Astigmatism обеспечивают защиту глаз от загрязнений и микробов, а также от УФ-излучения и синего света цифровых устройств.",
+    "image_preview": "products/photo/28448.webp",
+    "category": 1,
+    "price": 2144.0,
+    "created_at": "2024-07-13T10:57:28.320Z",
+    "updated_at": "2024-07-13T10:57:28.320Z",
+    "user_name_created": null
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 24,
+  "fields": {
+    "name": "AIR OPTIX plus HydraGlyde Multifocal (3 линзы)",
+    "description": "Мультифокальные ежемесячные контактные линзы созданы специально для людей с возрастным изменением зрения – пресбиопией и позволяют четко видеть на всех расстояниях без очков.\r\n\r\nAIR OPTIX® AQUA обладают высокой кислородной проницаемостью, даря глазам ощущение свежести на весь период ношения.\r\n\r\nБлагодаря увлажняющей матрице HydraGlyde® в линзах комфортно сразу после надевания.\r\n\r\nУникальная технология плазменной обработки поверхности SmartShield® защищает линзу от загрязнений и воздействия косметических средств.\r\n\r\nЕсли по какой-то причине линзы Alcon вам не подошли, вы можете получить компенсацию по программе «Мы вернём вам деньги». Для этого необходимо заполнить форму на сайте.",
+    "image_preview": "products/photo/21629.webp",
+    "category": 1,
+    "price": 2057.0,
+    "created_at": "2024-07-13T11:09:14.848Z",
+    "updated_at": "2024-07-13T11:09:22.017Z",
+    "user_name_created": "ice_eyes@mail.ru"
+  }
+},
+{
+  "model": "catalog.version",
+  "pk": 1,
+  "fields": {
+    "product": 5,
+    "version_number": "1",
+    "version_name": "1 DAY ACUVUE MOIST (180 линз) -3.50/8.5",
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.version",
+  "pk": 2,
+  "fields": {
+    "product": 15,
+    "version_number": "1",
+    "version_name": "ACUVUE OASYS for Astigmatism with Hydraclear Plus (6 линз)",
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.version",
+  "pk": 3,
+  "fields": {
+    "product": 5,
+    "version_number": "2",
+    "version_name": "1 DAY ACUVUE MOIST (180 линз) -3.50/8.5",
+    "is_active": false
+  }
+},
+{
+  "model": "catalog.version",
+  "pk": 4,
+  "fields": {
+    "product": 18,
+    "version_number": "1",
+    "version_name": "СОЛНЦЕЗАЩИТНЫЕ ОЧКИ NANO BIMBO 620215 С4  M",
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.version",
+  "pk": 5,
+  "fields": {
+    "product": 19,
+    "version_number": "1",
+    "version_name": "TOTAL30 for Astigmatism (3 линзы)",
+    "is_active": true
   }
 }
 ]

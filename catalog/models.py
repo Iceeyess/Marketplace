@@ -31,6 +31,7 @@ class Product(models.Model):
     price = models.FloatField(verbose_name="Стоимость товара", help_text="Введите строку стоимости товара")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    user_name_created = models.CharField(max_length=100, verbose_name='Пользователь', null=True, blank=True)
 
     def __str__(self):
         return self.name
