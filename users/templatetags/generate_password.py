@@ -13,3 +13,6 @@ def get_random_password() -> str:
     characters = string.ascii_letters + string.digits + string.punctuation + ''.join([str(_) for _ in range(10)])
     password = ''.join(random.choice(characters) for _ in range(quantity))
     return password
+
+
+# @register.filter(name='get_image_path')
