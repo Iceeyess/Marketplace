@@ -47,7 +47,7 @@ class CatalogCreateView(LoginRequiredMixin, CreateView):
         # получает на вход форму, сохраняет в БД
         if form.is_valid():
             user = form.save()
-            user.user_name_created = self.request.user.email
+            user.user_name_created = self.request.user.username
         return super().form_valid(form)
 
 

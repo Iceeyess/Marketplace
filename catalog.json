@@ -296,6 +296,20 @@
   }
 },
 {
+  "model": "catalog.product",
+  "pk": 34,
+  "fields": {
+    "name": "PRECISION1 for ASTIGMATISM (30 линз)",
+    "description": "Силикон-гидрогелевые контактные линзы для коррекции астигматизма. Длительность ношения линз — 1 день.",
+    "image_preview": "products/photo/22992.webp",
+    "category": 1,
+    "price": 2619.0,
+    "created_at": "2024-07-13T11:35:50.284Z",
+    "updated_at": "2024-07-13T11:35:50.287Z",
+    "user_name_created": "ice_eyes@mail.ru"
+  }
+},
+{
   "model": "catalog.version",
   "pk": 1,
   "fields": {
