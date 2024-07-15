@@ -7,6 +7,7 @@ from django.core.paginator import Paginator
 from .forms import ProductForm, VersionForm
 from django.urls import reverse_lazy
 from django.forms import inlineformset_factory
+from users.models import User
 
 # Create your views here.
 
@@ -47,7 +48,7 @@ class CatalogCreateView(LoginRequiredMixin, CreateView):
         # получает на вход форму, сохраняет в БД
         if form.is_valid():
             user = form.save()
-            user.user_name_created = self.request.user.username
+            user.owner = User.objects.get(username=self.request.user.username)
         return super().form_valid(form)
 
 
