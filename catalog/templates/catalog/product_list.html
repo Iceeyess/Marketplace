@@ -28,7 +28,7 @@
 </div>
 
 <div class="row">
-    {% for product in products %}
+    {% for product in page_obj %}
     <div class="col-3">
         <div class="card" style="width: 18rem;">
             <img src="{{ product.image_preview|get_image_path:'/static/apology.webp' }}" class="card-img-top"
