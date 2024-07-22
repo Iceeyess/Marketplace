@@ -31,7 +31,7 @@ class CatalogListView(LoginRequiredMixin, ListView):
                 continue
             else:
                 if v and v.is_active:
-                    query.name = 'Версионное название'
+                    query.name = v.version_name + ' Version #' + v.version_number
         p = Paginator(query_list, self.paginate_by)
         page_number = self.request.GET.get('page')
         page_obj = p.get_page(page_number)
