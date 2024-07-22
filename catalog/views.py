@@ -12,43 +12,48 @@ from users.models import User
 # Create your views here.
 
 
-# class CatalogListView(LoginRequiredMixin, ListView):
-#     model = Product
-#     paginate_by = 8
-#     context_object_name = 'products'
-#     extra_context = {
-#         'project_name': CatalogConfig.name,
-#         'title': 'Каталог продуктов',
-#     }
-#
-#     def get_context_data(self, *args, **kwargs):
-#         self.content = super().get_context_data(*args, **kwargs)
-#         query_list = self.get_queryset(*args, **kwargs)
-#         for query in query_list:
-#             try:
-#                 v = Version.objects.get(pk=query.pk)
-#             except v.DoesNotExist:
-#                 continue
-#             else:
-#                 if v and v.is_active:
-#                     query.name = 'Версионное название'
-#         self.content['products'] = query_list
-#         return self.content
-def catalog_list(request):
-    products = Product.objects.all()
-    for product in products:
-        try:
-            v = Version.objects.get(pk=product.pk)
-        except v.DoesNotExist:
-            continue
-        else:
-            if v and v.is_active:
-                product.name = 'Версионное название'
-    p = Paginator(products, 8)
-    page_number = request.GET.get('page')
-    page_obj = p.get_page(page_number)
-    return render(request, 'catalog/product_list.html', {'page_obj': page_obj, 'project_name': CatalogConfig.name})
+class CatalogListView(LoginRequiredMixin, ListView):
+    model = Product
+    paginate_by = 8
+    context_object_name = 'products'
+    extra_context = {
+        'project_name': CatalogConfig.name,
+        'title': 'Каталог продуктов',
+    }
 
+    def get_context_data(self, *args, **kwargs):
+        self.content = super().get_context_data(*args, **kwargs)
+        query_list = self.get_queryset(*args, **kwargs)
+        for query in query_list:
+            try:
+                v = Version.objects.get(pk=query.pk)
+            except v.DoesNotExist:
+                continue
+            else:
+                if v and v.is_active:
+                    query.name = 'Версионное название'
+        p = Paginator(query_list, self.paginate_by)
+        page_number = self.request.GET.get('page')
+        page_obj = p.get_page(page_number)
+        self.content['page_obj'] = page_obj
+        return self.content
+
+
+# def catalog_list(request):
+#     # Клон CatalogListView
+#     products = Product.objects.all()
+#     for product in products:
+#         try:
+#             v = Version.objects.get(pk=product.pk)
+#         except v.DoesNotExist:
+#             continue
+#         else:
+#             if v and v.is_active:
+#                 product.name = 'Версионное название'
+#     p = Paginator(products, 8)
+#     page_number = request.GET.get('page')
+#     page_obj = p.get_page(page_number)
+#     return render(request, 'catalog/product_list.html', {'page_obj': page_obj, 'project_name': CatalogConfig.name})
 
 
 class CatalogDetailView(LoginRequiredMixin, DetailView):
