@@ -7,13 +7,14 @@ class ProductForm(ModelForm):
     category = forms.ModelChoiceField(queryset=Category.objects.all(), label='Категория', empty_label='Категория не выбрана')
     class Meta:
         model = Product
-        fields = ['name', 'description', 'image_preview', 'category', 'price', ]
+        fields = ['name', 'description', 'image_preview', 'category', 'price', 'public', ]
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'image_preview': forms.FileInput(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'public': forms.CheckboxInput(attrs={'type': 'checkbox', 'class': 'checkbox', }),
         }
 
     def clean_name(self):

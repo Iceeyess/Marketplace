@@ -32,6 +32,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='Владелец', null=True, blank=True)
+    public = models.BooleanField(default=False, verbose_name='Признак публикации')
 
     def __str__(self):
         return self.name
@@ -40,6 +41,17 @@ class Product(models.Model):
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ("name",)
+        permissions = [
+            (
+                "delete_public_product", "Can disable product"
+            ),
+            (
+                "change_product_description", "Can change product description"
+            ),
+            (
+                "change_product_category", "Can change product category"
+            ),
+        ]
 
 
 class Version(models.Model):
