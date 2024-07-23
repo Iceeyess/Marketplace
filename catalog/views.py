@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -8,6 +9,7 @@ from .forms import ProductForm, VersionForm
 from django.urls import reverse_lazy
 from django.forms import inlineformset_factory
 from users.models import User
+from .forms import ProductModeratorUpdateForm, ProductUserUpdateForm
 
 # Create your views here.
 
@@ -83,7 +85,6 @@ class CatalogCreateView(LoginRequiredMixin, CreateView):
 
 class CatalogUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
-    form_class = ProductForm
     success_url = reverse_lazy('catalog:product')
     extra_context = {
         'project_name': CatalogConfig.name,
@@ -97,7 +98,6 @@ class CatalogUpdateView(LoginRequiredMixin, UpdateView):
             context_data['formset'] = ProductFormset(self.request.POST, instance=self.object)
         else:
             context_data['formset'] = ProductFormset(instance=self.object)
-
         return context_data
 
     def form_valid(self, form):
@@ -107,6 +107,13 @@ class CatalogUpdateView(LoginRequiredMixin, UpdateView):
             formset.instance = self.object
             formset.save()
         return super().form_valid(form)
+
+    def get_form_class(self):
+        """Переопределяет форму для модераторов и обычных пользователей"""
+        if self.request.user.has_perms(['delete_public_product', 'change_product_description',
+                                        'change_product_category', ]):
+            return ProductModeratorUpdateForm
+        return ProductUserUpdateForm
 
 
 class CatalogDeleteView(LoginRequiredMixin, DeleteView):
