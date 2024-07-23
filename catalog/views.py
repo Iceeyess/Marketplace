@@ -9,6 +9,7 @@ from .forms import ProductForm, VersionForm
 from django.urls import reverse_lazy
 from django.forms import inlineformset_factory
 from users.models import User
+from .forms import ProductModeratorUpdateForm, ProductUserUpdateForm
 
 # Create your views here.
 
@@ -84,7 +85,6 @@ class CatalogCreateView(LoginRequiredMixin, CreateView):
 
 class CatalogUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
-    form_class = ProductForm
     success_url = reverse_lazy('catalog:product')
     extra_context = {
         'project_name': CatalogConfig.name,
@@ -108,6 +108,13 @@ class CatalogUpdateView(LoginRequiredMixin, UpdateView):
             formset.instance = self.object
             formset.save()
         return super().form_valid(form)
+
+    def get_form_class(self):
+        """Переопределяет форму для модераторов и обычных пользователей"""
+        if self.request.user.has_perms(['delete_public_product', 'change_product_description',
+                                        'change_product_category', ]):
+            return ProductModeratorUpdateForm
+        return ProductUserUpdateForm
 
 
 class CatalogDeleteView(LoginRequiredMixin, DeleteView):
