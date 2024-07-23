@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .forms import BlogForm
+from .forms import BlogForm, NoneForm
 from .models import Blog
 from .apps import BlogConfig
 from pytils.translit import slugify
@@ -72,7 +72,7 @@ class BlogUpdateView(LoginRequiredMixin, UpdateView):
             group_query_list.get(name='content-manager')
         except BaseException:
             # raise 'Access is denied'
-            return redirect(reverse('blog:blog_view'))
+            return NoneForm #redirect(reverse('blog:blog_view'))
         else:
             return BlogForm
 

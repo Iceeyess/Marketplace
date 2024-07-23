@@ -14,3 +14,10 @@ class BlogForm(ModelForm):
             'image_preview': forms.FileInput(attrs={'class': 'form-control'}),
             'is_public': forms.CheckboxInput(attrs={'type': 'checkbox', 'class': 'checkbox', }),
         }
+
+
+class NoneForm(ModelForm):
+    """Форма для отображения пустых значений для пользователей не являющихся content-manager"""
+    class Meta:
+        model = Blog
+        fields = []
