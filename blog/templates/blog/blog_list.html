@@ -28,10 +28,14 @@
                             <div class="p-1"><a href="{% url 'blog:blog_detail' object.pk %}" class="btn btn-primary">Подробнее...</a>
                             </div>
                         </div>
+
+                        {% if perms.blog.change_blog %}
                         <div class="col">
                             <div class="p-1"><a href="{% url 'blog:blog_update' object.pk %}" class="btn btn-primary">Редактировать</a>
                             </div>
                         </div>
+                        {% endif %}
+
                         <div class="col">
                             <div class="p-1"><a href="{% url 'blog:blog_delete' object.pk %}" class="btn btn-primary">Удалить</a>
                             </div>
