@@ -98,7 +98,6 @@ class CatalogUpdateView(LoginRequiredMixin, UpdateView):
             context_data['formset'] = ProductFormset(self.request.POST, instance=self.object)
         else:
             context_data['formset'] = ProductFormset(instance=self.object)
-
         return context_data
 
     def form_valid(self, form):
