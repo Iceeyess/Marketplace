@@ -67,10 +67,15 @@ class BlogUpdateView(LoginRequiredMixin, UpdateView):
     }
 
     def get_form_class(self):
-        if self.request.user == self.object.owner:
-            return BlogForm
-        else:
+        try:
+            group_query_list = Blog.objects.get(pk=self.object.pk).owner.groups.all()
+            group_query_list.get(name='content-manager')
+        except BaseException:
+            # raise 'Access is denied'
             return redirect(reverse('blog:blog_view'))
+        else:
+            return BlogForm
+
 
     def form_valid(self, form):
         # получает на вход форму, изменяет в атрибуте slug, сохраняет в БД
