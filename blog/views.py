@@ -1,16 +1,22 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
+from .forms import BlogForm
 from .models import Blog
 from .apps import BlogConfig
 from pytils.translit import slugify
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+
+
 # Create your views here.
+
 
 class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Blog
-    fields = ['title', 'body', 'image_preview', 'is_public', ]
+    form_class = BlogForm
     success_url = reverse_lazy('blog:blog_view')
     extra_context = {
         'project_name': BlogConfig.name,
@@ -22,7 +28,9 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
         # получает на вход форму, изменяет в атрибуте slug, сохраняет в БД
         if form.is_valid():
             new_blog = form.save()
-            new_blog.slug = slugify(new_blog.title)
+            new_blog.slug = slugify(new_blog.title)  # запоминаем slug code
+            owner = self.request.user  # запоминаем владельца
+            new_blog.owner = owner
             new_blog.save()
         return super().form_valid(form)
 
@@ -51,12 +59,18 @@ class BlogDetailView(DetailView):
 
 class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
-    fields = ['title', 'body', 'image_preview', 'is_public', ]
+    form_class = BlogForm
     success_url = reverse_lazy('blog:blog_view')
     extra_context = {
         'project_name': BlogConfig.name,
         'title': 'Обновление блога'
     }
+
+    def get_form_class(self):
+        if self.request.user == self.object.owner:
+            return BlogForm
+        else:
+            return redirect(reverse('blog:blog_view'))
 
     def form_valid(self, form):
         # получает на вход форму, изменяет в атрибуте slug, сохраняет в БД
