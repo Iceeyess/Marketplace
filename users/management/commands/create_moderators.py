@@ -22,6 +22,8 @@ class Command(BaseCommand):
         for codename, name in new_perms:
             perms = Permission.objects.filter(codename=codename)
             if len(perms):
+                permission = Permission.objects.create(codename=codename, name=name, content_type=content_type)
+                new_group.permissions.add(permission)
                 continue
             else:
                 permission = Permission.objects.create(codename=codename, name=name, content_type=content_type)

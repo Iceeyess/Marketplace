@@ -1,4 +1,5 @@
 Создание Фикстур и Команд для загрузки данных по пользователям, каталогу, блогу, полномочиям.
+Создайте БД - CREATE DATABASE marketplace;
 1) Делаем миграции:
 python3 manage.py makemigrations
 python3 manage.py migrate
@@ -15,3 +16,5 @@ python3 manage.py create_moderators
 python3 manage.py create_content_managers
 6) Запускаем создание блога в кол-ве 1 шт. Который должен был создать Павлик Кроликов, а проверить может Антоша Гагарин.
 python3 manage.py loaddata blog.json
+7) Запускаем приложение и наслаждаемся проверкой кода.
+python3 manage.py runserver
