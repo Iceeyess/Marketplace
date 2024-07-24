@@ -35,11 +35,12 @@
                             </div>
                         </div>
                         {% endif %}
-
+                        {% if perms.blog.delete_blog %}
                         <div class="col">
                             <div class="p-1"><a href="{% url 'blog:blog_delete' object.pk %}" class="btn btn-primary">Удалить</a>
                             </div>
                         </div>
+                        {% endif %}
                         <div class="alert alert-light" role="alert"> Счетчик просмотров {{ object.count_view }} </div>
                     </div>
                 </div>

@@ -68,14 +68,11 @@ class BlogUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_form_class(self):
         try:
-            group_query_list = Blog.objects.get(pk=self.object.pk).owner.groups.all()
-            group_query_list.get(name='content-manager')
+            self.request.user.groups.get(name='content_manager')
         except BaseException:
-            # raise 'Access is denied'
-            return NoneForm #redirect(reverse('blog:blog_view'))
+            return NoneForm
         else:
             return BlogForm
-
 
     def form_valid(self, form):
         # получает на вход форму, изменяет в атрибуте slug, сохраняет в БД
@@ -92,3 +89,14 @@ class BlogUpdateView(LoginRequiredMixin, UpdateView):
 class BlogDeleteView(LoginRequiredMixin, DeleteView):
     model = Blog
     success_url = reverse_lazy('blog:blog_view')
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        try:
+            self.request.user.groups.get(name='content_manager')
+            print('content_manager есть')
+        except BaseException:
+            print('content_manager нет')
+            return HttpResponseRedirect(reverse('blog:blog_detail', args=[self.object.pk]))
+        else:
+            return self.object
