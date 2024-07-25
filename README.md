@@ -3,6 +3,8 @@
 1) Делаем миграции:
 python3 manage.py makemigrations
 python3 manage.py migrate
+Пункт 1 был отменен наставником ввиду того, что миграции должны быть в гите.
+------------------------------------------------------------------------------------------------
 2) Запускаем скрипт create_user
 python3 manage.py create_user
 P.S. есть еще противо-команда python3 manage.py delete_user

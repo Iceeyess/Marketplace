@@ -12,7 +12,7 @@
         <p class="text">Описание:</p>
         <p class="lead">{{ product.description }}</p>
         <a class="btn btn-danger" href="{% url 'catalog:product_delete' product.pk %}">Удалить</a>
-        {% if user == object.owner or perms.catalog.delete_public_product %}
+        {% if request.user == object.owner or request.user.is_moderator %}
         <a class="btn btn-primary" href="{% url 'catalog:product_update' product.pk %}">  Редактировать</a>
         {% endif %}
     </div>
