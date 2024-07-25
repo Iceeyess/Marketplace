@@ -11,7 +11,9 @@
         <h2 class="featurette-heading">{{ product.name }}></h2>
         <p class="text">Описание:</p>
         <p class="lead">{{ product.description }}</p>
+        {% if request.user.is_moderator %}
         <a class="btn btn-danger" href="{% url 'catalog:product_delete' product.pk %}">Удалить</a>
+        {% endif %}
         {% if request.user == object.owner or request.user.is_moderator %}
         <a class="btn btn-primary" href="{% url 'catalog:product_update' product.pk %}">  Редактировать</a>
         {% endif %}

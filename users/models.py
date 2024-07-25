@@ -24,3 +24,6 @@ class User(AbstractUser):
     def is_moderator(self):
         return self.groups.filter(name='moderators').exists()
 
+    @property
+    def is_content_manager(self):
+        return self.groups.filter(name='content_manager').exists()
