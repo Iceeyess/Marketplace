@@ -110,10 +110,12 @@ class CatalogUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_form_class(self):
         """Переопределяет форму для модераторов и обычных пользователей"""
-        if self.request.user.has_perms(['delete_public_product', 'change_product_description',
-                                        'change_product_category', ]):
+        try:
+            self.request.user.groups.get(name='moderators')
+        except BaseException:
+            return ProductUserUpdateForm
+        else:
             return ProductModeratorUpdateForm
-        return ProductUserUpdateForm
 
 
 class CatalogDeleteView(LoginRequiredMixin, DeleteView):

@@ -2,6 +2,7 @@ from django.core.management import BaseCommand
 from django.db import IntegrityError
 
 from users.models import User
+from catalog.models import Product
 from django.contrib.auth.models import Permission, Group
 from django.contrib.contenttypes.models import ContentType
 
@@ -16,7 +17,7 @@ class Command(BaseCommand):
         new_perms = (('delete_public_product', 'Can disable product'),
                      ('change_product_description', 'Can change product description'),
                      ('change_product_category', 'Can change product category'))
-        content_type = ContentType.objects.get_for_model(User)
+        content_type = ContentType.objects.get_for_model(Product)
         new_group, is_created_group = Group.objects.get_or_create(name='moderators')
 
         for codename, name in new_perms:
