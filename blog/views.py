@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -86,17 +86,9 @@ class BlogUpdateView(LoginRequiredMixin, UpdateView):
         return reverse_lazy('blog:blog_detail', args=[self.kwargs.get('pk')])
 
 
-class BlogDeleteView(LoginRequiredMixin, DeleteView):
+class BlogDeleteView(LoginRequiredMixin,  PermissionRequiredMixin, DeleteView):
     model = Blog
     success_url = reverse_lazy('blog:blog_view')
 
-    def get_object(self, queryset=None):
-        self.object = super().get_object(queryset)
-        try:
-            self.request.user.groups.get(name='content_manager')
-            print('content_manager есть')
-        except BaseException:
-            print('content_manager нет')
-            return HttpResponseRedirect(reverse('blog:blog_detail', args=[self.object.pk]))
-        else:
-            return self.object
+    def has_permission(self):
+        return self.request.user.groups.filter(name='content_manager').exists()
