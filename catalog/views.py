@@ -118,7 +118,7 @@ class CatalogUpdateView(LoginRequiredMixin, UpdateView):
             return ProductModeratorUpdateForm
 
 
-class CatalogDeleteView(LoginRequiredMixin, DeleteView):
+class CatalogDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:product')
     extra_context = {
@@ -126,6 +126,9 @@ class CatalogDeleteView(LoginRequiredMixin, DeleteView):
         'title': 'Создание товара'
     }
 
+    def has_permission(self):
+        return self.request.user.groups.filter(name='moderators').exists() or \
+               self.request.user.has_perm('catalog.delete_product')
 
 
 
