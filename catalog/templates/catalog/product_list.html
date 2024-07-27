@@ -10,7 +10,8 @@
                 <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">
                     {{page_obj.previous_page_number}}</a></li>
                 {% endif %}
-                <li class="page-item active"><a class="page-link" href="?page={{ page_obj.number }}">{{page_obj.number}}</a></li>
+                <li class="page-item active"><a class="page-link"
+                                                href="?page={{ page_obj.number }}">{{page_obj.number}}</a></li>
                 {% if page_obj.has_next %}
                 <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">
                     {{page_obj.next_page_number}}</a></li>
@@ -27,27 +28,40 @@
     </div>
 </div>
 
-<div class="row">
-    {% for product in page_obj %}
-    <div class="col-3">
-        <div class="card" style="width: 18rem;">
-            <img src="{{ product.image_preview|get_image_path:'/static/apology.webp' }}" class="card-img-top"
-                 alt="product" width="200" height=200>
-            <div class="card-body">
-                <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.description|slice:":100" }}...</p>
-                <div class="row">
-                    <div class="col-auto">
-                        <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-primary">Подробнее...</a>
-                    </div>
-                    <div class="col-auto center">
-                        <p class="text-dark-end m-1">{{ product.price|floatformat:"2g" }} руб.</p>
+<div class="row-2">
+    <div class="container">
+        <div class="row-auto">
+            <p>Список категорий: </p>
+            {% for category in cached_categories %}
+            <p>{{ category }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <h2>Каталог продуктов</h2>
+            {% for product in page_obj %}
+            <div class="col-3">
+                <div class="card">
+                    <img src="{{ product.image_preview|get_image_path:'/static/apology.webp' }}" class="card-img-top"
+                         alt="product" width="200" height=200>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description|slice:":100" }}...</p>
+                        <div class="row">
+                            <div class="col-auto">
+                                <a href="{% url 'catalog:product_detail' product.pk %}"
+                                   class="btn btn-primary">Подробнее...</a>
+                            </div>
+                            <div class="col-auto center">
+                                <p class="text-dark-end m-1">{{ product.price|floatformat:"2g" }} руб.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
+        {% endblock %}
     </div>
-    {% endfor %}
 </div>
-{% endblock %}
-
