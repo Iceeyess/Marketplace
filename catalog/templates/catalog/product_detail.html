@@ -6,16 +6,16 @@
 
 <div class="row featurette">
     <div class="col-md-7 order-md-2">
-        <p class="lead">Стоимость: {{ product.price }}</p>
+        <p class="lead">Стоимость: {{ object.price }}</p>
         <p class="text">Наименование:</p>
-        <h2 class="featurette-heading">{{ product.name }}></h2>
+        <h2 class="featurette-heading">{{ object.name }}></h2>
         <p class="text">Описание:</p>
-        <p class="lead">{{ product.description }}</p>
+        <p class="lead">{{ object.description }}</p>
         {% if request.user.is_moderator %}
-        <a class="btn btn-danger" href="{% url 'catalog:product_delete' product.pk %}">Удалить</a>
+        <a class="btn btn-danger" href="{% url 'catalog:product_delete' object.pk %}">Удалить</a>
         {% endif %}
         {% if request.user == object.owner or request.user.is_moderator %}
-        <a class="btn btn-primary" href="{% url 'catalog:product_update' product.pk %}">  Редактировать</a>
+        <a class="btn btn-primary" href="{% url 'catalog:product_update' object.pk %}">  Редактировать</a>
         {% endif %}
     </div>
     <div class="col-md-5 order-md-1">

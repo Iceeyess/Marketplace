@@ -16,18 +16,23 @@ from catalog.apps import CatalogConfig
 from contacts.apps import ContactsConfig
 from users.apps import UsersConfig
 from blog.apps import BlogConfig
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load environment variables from.env file
+dot_env = os.path.join(BASE_DIR, '.env')
+load_dotenv(dotenv_path=dot_env)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-=u^yfvuk()cv#&_pn%asbkwfd$g_*y1ivom^3_wonue+0dz26e"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('APPLICATIONS_DEBUG')
 
 ALLOWED_HOSTS = ["*"]
 
@@ -87,11 +92,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "marketplace",
-        "USER": "postgres",
-        "PASSWORD": "Herbalife1",
-        "HOST": "127.0.0.1",
-        "PORT": 5432,
+        "NAME": os.getenv('DATABASE_NAME'),
+        "USER": os.getenv('DATABASE_USER'),
+        "PASSWORD": os.getenv('DATABASE_PASSWORD'),
+        "HOST": os.getenv('DATABASE_HOST'),
+        "PORT": os.getenv('DATABASE_PORT'),
     }
 }
 
@@ -140,12 +145,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL[1:])
 
-EMAIL_HOST = 'smtp.mail.ru'
-EMAIL_PORT = 2525
-EMAIL_HOST_USER = "21cfk8lf6gbp@mail.ru"
-EMAIL_HOST_PASSWORD = "1NX21AcSLns2XUkuQbsv"
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER = os.getenv('EMAIL_ADDRESS')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
+EMAIL_USE_TLS = True if os.getenv('EMAIL_USE_TLS') else False
+EMAIL_USE_SSL = True if os.getenv('EMAIL_USE_TLS') else False
 
 LOGIN_REDIRECT_URL = "catalog:product"
 LOGIN_URL = "users:login"
@@ -155,3 +160,12 @@ AUTH_USER_MODEL = "users.User"
 
 # для того чтобы не отправлять письма физически, а только в консоли
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+CACHE_ENABLED = os.getenv('CACHE_ENABLED') == 'True'
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": os.getenv('CACHE_LOCATION'),
+        }
+    }

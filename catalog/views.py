@@ -2,6 +2,9 @@ from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
+
+from config import settings
 from .models import Product, Category, Version
 from .apps import CatalogConfig
 from django.core.paginator import Paginator
@@ -10,6 +13,10 @@ from django.urls import reverse_lazy
 from django.forms import inlineformset_factory
 from users.models import User
 from .forms import ProductModeratorUpdateForm, ProductUserUpdateForm
+from django.core.cache import cache
+
+from .services import list_categories
+
 
 # Create your views here.
 
@@ -38,7 +45,18 @@ class CatalogListView(LoginRequiredMixin, ListView):
         page_number = self.request.GET.get('page')
         page_obj = p.get_page(page_number)
         self.content['page_obj'] = page_obj
+        #  Список категорий из БД
+        self.content['cached_categories'] = list_categories()
         return self.content
+
+
+    # def get_queryset(self):
+    #     if settings.CACHE_ENABLED and cache.get('cached_categories'):
+    #         print('из кэша')
+    #         return cache.get('cached_categories')
+    #     else:
+    #         cached_categories = Category.objects.all()
+    #         return cached_categories
 
 
 # def catalog_list(request):
@@ -64,6 +82,14 @@ class CatalogDetailView(LoginRequiredMixin, DetailView):
         'project_name': CatalogConfig.name,
         'title': 'Детализация товара'
     }
+
+    def get_object(self, queryset=None):
+        """Чтение атрибутов из Кэш или БД"""
+        if cache.get('cached_obj'):
+            return cache.get('cached_obj')
+        self.object = super().get_object(queryset)
+        cache.set('cached_obj', self.object, 10)
+        return cache.get('cached_obj')
 
 
 class CatalogCreateView(LoginRequiredMixin, CreateView):
