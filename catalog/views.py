@@ -50,30 +50,6 @@ class CatalogListView(LoginRequiredMixin, ListView):
         return self.content
 
 
-    # def get_queryset(self):
-    #     if settings.CACHE_ENABLED and cache.get('cached_categories'):
-    #         print('из кэша')
-    #         return cache.get('cached_categories')
-    #     else:
-    #         cached_categories = Category.objects.all()
-    #         return cached_categories
-
-
-# def catalog_list(request):
-#     # Клон CatalogListView
-#     products = Product.objects.all()
-#     for product in products:
-#         try:
-#             v = Version.objects.get(pk=product.pk)
-#         except v.DoesNotExist:
-#             continue
-#         else:
-#             if v and v.is_active:
-#                 product.name = 'Версионное название'
-#     p = Paginator(products, 8)
-#     page_number = request.GET.get('page')
-#     page_obj = p.get_page(page_number)
-#     return render(request, 'catalog/product_list.html', {'page_obj': page_obj, 'project_name': CatalogConfig.name})
 
 
 class CatalogDetailView(LoginRequiredMixin, DetailView):
@@ -192,3 +168,20 @@ class CatalogDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView)
 #         print(number, product)
 #     obj = dict(catalog_key=product_list, project_name=CatalogConfig.name, page_obj=page_obj)
 #     return render(request, os.path.join(CatalogConfig.name, "index.html"), context=obj)
+
+
+# def catalog_list(request):
+#     # Клон CatalogListView
+#     products = Product.objects.all()
+#     for product in products:
+#         try:
+#             v = Version.objects.get(pk=product.pk)
+#         except v.DoesNotExist:
+#             continue
+#         else:
+#             if v and v.is_active:
+#                 product.name = 'Версионное название'
+#     p = Paginator(products, 8)
+#     page_number = request.GET.get('page')
+#     page_obj = p.get_page(page_number)
+#     return render(request, 'catalog/product_list.html', {'page_obj': page_obj, 'project_name': CatalogConfig.name})
