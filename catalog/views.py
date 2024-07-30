@@ -50,8 +50,6 @@ class CatalogListView(LoginRequiredMixin, ListView):
         return self.content
 
 
-
-
 class CatalogDetailView(LoginRequiredMixin, DetailView):
     model = Product
     extra_context = {

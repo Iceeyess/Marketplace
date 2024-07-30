@@ -43,7 +43,7 @@ class BlogListView(LoginRequiredMixin, ListView):
     }
 
 
-class BlogDetailView(DetailView):
+class BlogDetailView(LoginRequiredMixin, DetailView):
     model = Blog
     extra_context = {
         'project_name': BlogConfig.name,
